@@ -1,0 +1,19 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block body %}
+    <h1>Ops, Wrong Page</h1>
+    <h2>You mean</h2>
+    <ul>
+        {% for sugestao  in listasugestoes %}
+            <li>
+                <a href="{% url 'entry' sugestao %}">{{ sugestao }}</a>
+            </li>
+    
+        {% endfor %}
+    </ul>
+     
+{% endblock %}
