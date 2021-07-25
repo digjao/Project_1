@@ -5,15 +5,17 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Ops, Wrong Page</h1>
-    <h2>You mean</h2>
-    <ul>
-        {% for sugestao  in listasugestoes %}
-            <li>
-                <a href="{% url 'entry' sugestao %}">{{ sugestao }}</a>
-            </li>
-    
-        {% endfor %}
-    </ul>
-     
+    <h1>Searching for {{ title }}</h1>
+    <h2>Sorry, we cant find this</h2>
+    {% if listasugestoes %}
+        <h2>You mean</h2>
+        <ul>
+          {% for sugestao  in listasugestoes %}
+              <li>
+                    <a href="{% url 'entry' sugestao %}">{{ sugestao }}</a>
+              </li>
+          {% endfor %}
+        </ul>
+    {% endif %}
+    <h3>To create a new page, just click <a href="{% url 'newEntry' %}">HERE</a></h3> 
 {% endblock %}
