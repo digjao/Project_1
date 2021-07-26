@@ -32,7 +32,7 @@ def entry(request, title):
     else: 
         return render(request, "encyclopedia/entry.html", {"title":title, "entry":markdown2.markdown(EntryPage)})
     
-def newEntry(request):
+def renderNewEntryPage(request):
     return render(request, "encyclopedia/newEntry.html")
 
 
@@ -42,3 +42,12 @@ def random(request):
     entriesMD = util.list_entries()
     randomEntries = secrets.choice(entriesMD)
     return HttpResponseRedirect(reverse("entry", kwargs={'title':randomEntries}))
+
+def saveNewPage(request):
+    # TODO!
+    # fi request.POST[]
+    textarea = request.POST['md']
+    title = request.POST['newEntryTitle']
+    util.save_entry(title,textarea)
+    return HttpResponseRedirect(reverse("entry", kwargs={'title':title}))
+

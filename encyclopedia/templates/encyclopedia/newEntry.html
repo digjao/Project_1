@@ -5,12 +5,25 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Creating a new Page</h1>
+<style>
+    .textarea { 
+        resize: none;
+        height: 15vh;
+        width: 50vh;
 
-    <form action="">
-        title of the page
+    }
+</style>
+<h2>Creating a new page</h2>
+{% csrf_token %}
+    <form action="{% url 'saveNewPage' %}" method="POST">
+        <input type="text" name="newEntryTitle">
+            <textarea name="md" rows="1" cols="20"></textarea>
+                <input type="submit"></input>
+                    
+
+       
+        
     </form>
-    <textarea></textarea>
 
 
 
