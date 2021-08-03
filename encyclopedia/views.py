@@ -18,7 +18,8 @@ class NewEntryForm(forms.Form):
         widget=forms.Textarea(
             attrs={
                 'class' : 'form-control col-md-8 col-lg-8',
-                'rows': 10, 'placeholder':'Remember to use markdown sintax'}))
+                'rows': 10, 
+                'placeholder':'Remember to use markdown sintax'}))
     edit = forms.BooleanField( initial=False, widget=forms.HiddenInput(), required=False)
 
 def index(request):
@@ -93,17 +94,3 @@ def random(request):
     entriesMD = util.list_entries()
     randomEntries = secrets.choice(entriesMD)
     return HttpResponseRedirect(reverse("entry", kwargs={'entry':randomEntries}))
-#para a função random, importei o modulo SECRETS para chamar a função CHOICE que é responsavel por escolher 
-#algum elemento de uma nom-empty sequence
-
-#def saveNewPage(request):
-    # TO DO!
-    # fi request.POST[]
-    #textarea = request.POST['md']
-    #title = request.POST['newEntryTitle']
-    #util.save_entry(title,textarea)
-    #return HttpResponseRedirect(reverse("entry", kwargs={'title':(title)}))
-
-#def editPage(request,):
-    #if request.method == "POST":
-

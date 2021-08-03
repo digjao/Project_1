@@ -1,12 +1,12 @@
 {% extends "encyclopedia/layout.html" %}
 
 {% block title %}
-    {{ title }}
+    {{ entry }}
 {% endblock %}
 
 {% block body %}
-    <h1>Searching for {{ title }}</h1>
-    <h2>Sorry, we cant find this</h2>
+    <h1>Searching for {{ entry }}</h1>
+    <h2>Sorry, we cant find this page</h2>
     {% if listasugestoes %}
         <h2>You mean</h2>
         <ul>
