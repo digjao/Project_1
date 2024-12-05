@@ -1,26 +1,22 @@
 {% extends "encyclopedia/layout.html" %}
 
 {% block title %}
-    {{ renderNewEntryPage }}
+{{ renderNewEntryPage }}
 {% endblock %}
 
 {% block body %}
-    <h2>Creating a new page</h2>
-    {% if existing %}
-    <div class="alert alert-danger" role="alert">This page alredy exists, If you wanto to visit this page,<a href="/wiki/{{ entry }}" class="alert-link"> click here</a> </div>
-    {% endif %}
-    
-    <form action="{% url 'renderNewEntryPage' %}" method="POST">   
-        {% csrf_token %}
-        {{ form.as_p}}
-     <input type="submit"></input>
-    
-                    
+<h2>Creating a new page</h2>
+{% if existing %}
+<div class="alert alert-danger" role="alert">This page alredy exists, If you wanto to visit this page,<a
+    href="/wiki/{{ entry }}" class="alert-link"> click here</a> </div>
+{% endif %}
 
-       
-        
-    </form>
+<form action="{% url 'renderNewEntryPage' %}" method="POST">
+  {% csrf_token %}
+  {{ form.as_p}}
+  <button type="submit" class="btn btn-primary">Confirm</button>
 
 
 
+</form>
 {% endblock %}

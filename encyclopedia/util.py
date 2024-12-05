@@ -1,5 +1,6 @@
 import re
-
+import os
+import chardet
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 
@@ -38,12 +39,20 @@ def prefixo(title):
     return lista
 
 def get_entry(title):
-    """
-    Retrieves an encyclopedia entry by its title. If no such
-    entry exists, the function returns None.
-    """
     try:
-        f = default_storage.open(f"entries/{title}.md")
-        return f.read().decode("utf-8")
+        with open(f"entries/{title}.md", "rb") as f:  # Abra em modo binário
+            content = f.read()
+            # Detecta a codificação
+            encoding = chardet.detect(content)['encoding']
+            # Decodifica o conteúdo com a codificação detectada
+            return content.decode(encoding)
     except FileNotFoundError:
         return None
+    except UnicodeDecodeError:
+        return "Erro ao decodificar o arquivo. Verifique a codificação."
+
+
+def delete_entry(title):
+    filepath = f"entries/{title}.md"
+    if os.path.exists(filepath):  # Verifica se o arquivo existe
+        os.remove(filepath)  # Remove o arquivo       

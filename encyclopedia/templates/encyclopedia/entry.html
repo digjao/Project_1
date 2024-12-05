@@ -7,6 +7,21 @@
 
 {% block body %}
     
-    <a href="{% url 'edit' title  %}"><button type="button" class="btn btn-light">Edit</button></a>
-     {{ entry|safe }}
+    <a href="{% url 'edit' title  %}">
+      <button type="button" class="btn btn-light">Edit</button>
+    </a>
+
+    <form action="{% url 'delete_entry' entry=title %}" method="post" style="display: inline;">
+      {% csrf_token %}
+        <button
+            type="submit"
+            class="btn btn-danger"
+            onclick="return confirm('Are you sure you want to delete this entry?');">
+            Delete
+        </button>
+       </form>
+
+    <div>
+      {{ entry|safe }}
+   </div>
 {% endblock %}

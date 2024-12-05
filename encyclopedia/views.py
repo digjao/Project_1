@@ -94,3 +94,20 @@ def random(request):
     entriesMD = util.list_entries()
     randomEntries = secrets.choice(entriesMD)
     return HttpResponseRedirect(reverse("entry", kwargs={'entry':randomEntries}))
+
+
+def delete_entry(request, entry):
+    if request.method == "POST":
+        if util.get_entry(entry) is None:
+            return render(request, "encyclopedia/errorpage.html", {
+                "entry": entry,
+                "error": "A entrada não existe."
+            })
+        
+        util.delete_entry(entry)
+        return HttpResponseRedirect(reverse("index"))
+    else:
+        return render(request, "encyclopedia/errorpage.html", {
+            "entry": entry,
+            "error": "Requisição inválida."
+        })
